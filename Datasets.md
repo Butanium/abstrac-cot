@@ -1,0 +1,4 @@
+- HotpotQA
+- StrategyQA
+- OpenBookQA
+- TruthfulQA

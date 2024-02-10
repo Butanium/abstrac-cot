@@ -1,0 +1,3 @@
+[submodule "DecompositionFaithfulnessPaper"]
+	path = DecompositionFaithfulnessPaper
+	url = https://github.com/anthropics/DecompositionFaithfulnessPaper.git
