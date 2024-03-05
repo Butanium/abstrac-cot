@@ -4,6 +4,7 @@ from .constants import QUESTION_LABELS
 import json
 from transformers import AutoTokenizer
 from time import time
+from requests import HTTPError
 
 LOG_PATH = Path(__file__).parent.parent / "logs"
 
@@ -47,15 +48,31 @@ def stop_token(model):
         raise ValueError(f"Unknown stop token for model {model}")
 
 
+retry_errors = [429, 500, 504, 520, 524, 529]
+
+
 def query_model(prompt, model, stop, log_path=None, **kwargs) -> str:
     default_kwargs = dict(top_p=0.95, temperature=0.8)
     kwargs = {**default_kwargs, **kwargs}
-    api_response = together.Complete.create(
-        prompt,
-        model=model,
-        stop=stop,
-        **kwargs,
-    )
+    try:
+        api_response = together.Complete.create(
+            prompt,
+            model=model,
+            stop=stop,
+            **kwargs,
+        )
+    except HTTPError as e:
+        print(f"HTTPError: {e}")
+        if e.response.status_code in retry_errors:
+            return query_model(prompt, model, stop, log_path, **kwargs)
+        else:
+            retry = input("Retry? (y/n) ")
+            if retry.lower() == "y":
+                return query_model(prompt, model, stop, log_path, **kwargs)
+            else:
+                raise e
+
+
     if log_path is None:
         log_path = LOG_PATH / model
     save_path = log_path / "requests" / f"answer_{int(time())}.json"

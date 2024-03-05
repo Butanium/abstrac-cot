@@ -54,6 +54,8 @@ def decompose(
         subquestions = []
         cleaned_model_questions = []
         for subquestion in model_questions.split("\n"):
+            if subquestion == "":
+                continue
             try:
                 match_start = regex.search(r"<sub_q_(\d+)>", subquestion)
                 match_end = regex.search(r"</sub_q_(\d+)>", subquestion)

@@ -50,6 +50,24 @@ def few_shot(model, tokenizer, question, choices, log_path, few_shot_chat):
     return answer
 
 
+def zero_shot(model, tokenizer, question, choices, log_path):
+    """
+    Runs the zero-shot method on a single question and set of choices.
+
+    Args:
+        model: The model to use.
+        tokenizer: The tokenizer to use.
+        question: The question to answer.
+        choices: The list of choices for the question.
+        log_path: The path to log the results.
+        zero_shot_chat: The chat prompt to use for the zero-shot method.
+
+    Returns:
+        answer: The model's answer to the question.
+    """
+    return few_shot(model, tokenizer, question, choices, log_path, [])
+
+
 def chain_of_thought(model, tokenizer, question, choices, log_path, cot_chat):
     """
     Runs the chain of thought method on a single question and set of choices.

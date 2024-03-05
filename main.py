@@ -8,10 +8,11 @@ from pathlib import Path
 from tqdm.auto import tqdm
 from src.constants import QUESTION_LABELS
 from src.strategies import (
-    factored_decomposition,
+    zero_shot,
     few_shot,
     chain_of_thought,
     chain_of_thought_decomposition,
+    factored_decomposition,
 )
 from src.dataset_utils import get_dataset
 
@@ -66,11 +67,84 @@ def run_on_dataset(
         try:
             prediction = QUESTION_LABELS.index(answer)
             results.append(labels[prediction])
-        except ValueError:
+        except (ValueError, IndexError):
             print(f"Invalid answer: {answer}")
             results.append(0)
     with open(log_path / "all_results.json", "w") as f:
         json.dump(json_result, f, indent=4)
+    return results
+
+
+def run_all_methods(
+    model,
+    tokenizer,
+    dataset_name,
+    num_samples,
+    *,
+    fd_chats,
+    few_shot_chat,
+    cot_chat,
+    cotd_chat,
+    methods=None,
+    shuffle_choices=False,
+    start_time=None,
+    verbose=False,
+):
+    methods_dic = {
+        "factored_decomposition": (
+            factored_decomposition,
+            {
+                "decomp_chat": fd_chats["decomp_prompt"],
+                "recomp_chat": fd_chats["recomp_prompt"],
+            },
+        ),
+        "few_shot": (few_shot, {"few_shot_chat": few_shot_chat}),
+        "chain_of_thought": (chain_of_thought, {"cot_chat": cot_chat}),
+        "chain_of_thought_decomposition": (
+            chain_of_thought_decomposition,
+            {"cotd_chat": cotd_chat},
+        ),
+        "zero_shot": (zero_shot, {}),
+    }
+    if methods is None:
+        methods = methods_dic.keys()
+    else:
+        assert set(methods).issubset(
+            methods_dic.keys()
+        ), f"Unknown methods: {methods - methods_dic.keys()}"
+    if start_time is None:
+        start_time = int(time())
+    results = {}
+    result_path = LOG_PATH / model / dataset_name / f"{start_time}_results.json"
+    result_path.parent.mkdir(parents=True, exist_ok=True)
+    for method_name in methods:
+        method, kwargs = methods_dic[method_name]
+        if verbose:
+            print(f"Running {method_name} on {dataset_name}")
+        log_path = LOG_PATH / model / method_name / dataset_name / str(start_time)
+        log_path.mkdir(parents=True, exist_ok=True)
+
+        dataset, get_label_and_choices = get_dataset(dataset_name)
+        dataset_subset = dataset.select(range(num_samples))
+
+        method_results = run_on_dataset(
+            model,
+            tokenizer,
+            dataset_subset,
+            get_label_and_choices,
+            method,
+            log_path,
+            shuffle_choices=shuffle_choices,
+            **kwargs,
+        )
+
+        accuracy = sum(method_results) / len(method_results)
+        results[method_name] = accuracy
+        if verbose:
+            print(f"Accuracy on {dataset_name} ({method_name}): {accuracy}")
+        with open(result_path, "w") as f:
+            json.dump(results, f, indent=4)
+
     return results
 
 
@@ -98,6 +172,11 @@ if __name__ == "__main__":
         help="N first samples to select from the dataset",
         default=100,
     )
+    parser.add_argument(
+        "--shuffle-choices",
+        action="store_true",
+        help="Whether to shuffle the choices before running the decomposition",
+    )
     # add subcommand for each decomposition
     sub_parsers = parser.add_subparsers(dest="subcommand")
 
@@ -112,21 +191,24 @@ if __name__ == "__main__":
         action="store_true",
         help="Whether to skip the user instruction in the chat",
     )
-    parser_fd.add_argument(
-        "--shuffle-choices",
-        action="store_true",
-        help="Whether to shuffle the choices before running the decomposition",
-    )
 
     parser_fs = sub_parsers.add_parser("fewshot", help="Run few shot")
     parser_cot = sub_parsers.add_parser("cot", help="Run chain of thought")
     parser_cotd = sub_parsers.add_parser(
         "cotd", help="Run chain of thought decomposition"
     )
+    parser_all = sub_parsers.add_parser("all", help="Run all methods")
+    parser_all.add_argument(
+        "--methods",
+        nargs="+",
+        type=str,
+        help="The methods to run",
+        default=None,
+    )
 
     args, unknown = parser.parse_known_args()
     print(args)
-    model = args.model
+    model = args.model  # TODO: Fix system message not available for mixtral instruct
     if "meta-llama" in model and "chat" in model:
         tokenizer = AutoTokenizer.from_pretrained(
             "DeepInfra/Llama-2-70b-chat-tokenizer"
@@ -158,7 +240,7 @@ if __name__ == "__main__":
             get_label_and_choices,
             factored_decomposition,
             log_path,
-            shuffle_choices=f_args.shuffle_choices,
+            shuffle_choices=args.shuffle_choices,
             decomp_chat=fd_chats["decomp_prompt"],
             recomp_chat=fd_chats["recomp_prompt"],
             skip_system=f_args.skip_system,
@@ -226,3 +308,27 @@ if __name__ == "__main__":
         print(f"Accuracy on {dataset_name}: {sum(results) / len(results)}")
         with open(log_path / "results.json", "w") as f:
             json.dump(results, f, indent=4)
+    elif args.subcommand == "all":
+        all_args = parser_all.parse_args(unknown)
+        few_shot_chat = json.load(open("data/few_shot_chat minimal.json"))
+        fd_chats = json.load(open("data/new_fd minimal.json"))
+        cot_chat = json.load(open("data/cot_few_shot_chat minimal.json"))
+        cotd_chat = json.load(open("data/cotd_few_shot_chat minimal.json"))
+        start_time = int(time())
+        results = run_all_methods(
+            model,
+            tokenizer,
+            dataset_name,
+            args.num_samples,
+            methods=args.methods,
+            fd_chats=fd_chats,
+            few_shot_chat=few_shot_chat,
+            cot_chat=cot_chat,
+            cotd_chat=cotd_chat,
+            shuffle_choices=args.shuffle_choices,
+            start_time=start_time,
+            verbose=True,
+        )
+        print(results)
+    else:
+        raise ValueError(f"Unknown subcommand: {args.subcommand}")
