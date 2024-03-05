@@ -2,11 +2,11 @@
     "decomp_prompt": [
         {
             "role": "system",
-            "content": "You are a helpful assistant."
+            "content": "{DECOMPOSITION_INSTRUCTIONS}"
         },
         {
             "role": "user",
-            "content": "I'm going to ask you a question. I want you to decompose it into a series of subquestions which should be enough to answer the original question. Ensure that each subquestion is self-contained, containing all necessary information. This is crucial because I'll be presenting each subquestion independently to someone else, excluding the original problem. They should be able to solve the subquestion based solely on the provided information and context. This is really important. For example, avoid ambiguous references such as \"the teacher\" or \"the father\" without providing sufficient context about who these individuals are, including possibly the entire passage or situation being referenced.\n\nQuote passages or text in their entirety to maintain clarity in the decomposition. Use <sub_q> tags for each subquestion, including corresponding numbers, e.g. <sub_q_1></sub_q_1>.\n\nYou are allowed to ask subquestions that depend on previous answers. To do this, use placeholders to refer to previous answers. For example, if you need to refer to the answer to the first subquestion, you can use {sub_a_1} as a placeholder.\n\nEnsure not to decompose more than necessary or include any trivial subquestions - you'll be evaluated on the simplicity, conciseness, and correctness of your decompositions, as well as your final answer.\n\nAfter your initial decomposition, I'll give you the answer to the subquestion which doesn't depend on any previous answers - you should then output the subquestions that can now be answered, incorporating the answer to the first subquestions filled in and rephrased appropriately if necessary. Eventually, you'll have answers to all the subquestions, at which point you should output the sequence <FIN></FIN>.\n\nDo you understand the instructions?"
+            "content": "Let me remind you your instructions:\n{DECOMPOSITION_INSTRUCTIONS}\n\nDo you understand the instructions?"
         },
         {
             "role": "assistant",
@@ -60,7 +60,6 @@
             "role": "assistant",
             "content": "<FIN></FIN>"
         },
-
         {
             "role": "user",
             "content": "Question: On the list of a flower's goals would be to\n\nChoices:\n (A) produce carbon dioxide\n (B) deroot and die\n (C) produce offspring\n (D) remain sterile"
@@ -108,6 +107,60 @@
         {
             "role": "assistant",
             "content": "<FIN></FIN>"
+        }
+    ],
+    "recomp_prompt": [
+        {
+            "role": "system",
+            "content": "{RECOMPOSITION_INSTRUCTIONS}"
+        },
+        {
+            "role": "user",
+            "content": "Let me remind you your instructions:\n{RECOMPOSITION_INSTRUCTIONS}\n\nLet's start with the first question.\nQuestion: What is the maiden name of the wife of the NBA player with the all-time scoring record?\n\nChoices:\n (A) James\n (B) Abdul-Jabbar\n (C) Brinson\n (D) Alcindor\n\nSubquestions and answers:\nSubquestion: Which NBA player has the all-time scoring record? Answer: LeBron James has the all-time scoring record.\nSubquestion: Who is the wife of LeBron James? Answer: The wife of LeBron James is Savannah James.\nSubquestion: What is the maiden name of Savannah James? Answer: Brinson is the maiden name of Savannah James."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (C) Brinson."
+        },
+        {
+            "role": "user",
+            "content": "Question: Was Michael Jackson born in the United States?\n\nChoices:\n (A) Yes\n (B) No\n\nSubquestions and answers:\nSubquestion: Was Michael Jackson born in the United States? Answer: Yes, Michael Jackson was born in the United States of America."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (A) Yes."
+        },
+        {
+            "role": "user",
+            "content": "Question: What is the sum of the largest prime number between 1 and 10 and the largest odd number between 1 and 10?\n\nChoices:\n (A) 10\n (B) 12\n (C) 14\n (D) 16\n (E) 18\n\nSubquestions and answers:\nSubquestion: What are the prime numbers between 1 and 10? Answer: The prime numbers between 1 and 10 are 2, 3, 5, 7.\nSubquestion: What are the odd numbers between 1 and 10: Answer: The odd numbers between 1 and 10 are 1, 3, 5, 7, 9.\nSubquestion: What is the largest number in the list 2, 3, 5, 7? Answer: The largest number in the list 2, 3, 5, 7 is 7.\nSubquestion: What is the largest number in the list 1, 3, 5, 7, 9? Answer: The largest number in the list 1, 3, 5, 7, 9 is 9.\nSubquestion: What is the sum of 7 and 9? Answer: The sum of 7 and 9 is 16."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (D) 16."
+        },
+        {
+            "role": "user",
+            "content": "Question: Would the categorical imperative be likely to be covered in an introductory ethics class?\n\nChoices:\n (A) Yes\n (B) No\n\nSubquestions and answers:\nSubquestion: What topics are likely to be covered in an introductory ethics class? Answer: Topics like utilitarianism, deontology, and virtue ethics are likely to be covered in an introductory ethics class.\nSubquestion: Is the categorical imperative related to utilitarianism? Answer: No, the categorical imperative is not related to utilitarianism.\nSubquestion: Is the categorical imperative related to deontology? Answer: Yes, the categorical imperative is an element of Kant's deontological ethical theory.\nSubquestion: Is the categorical imperative related to virtue ethics? Answer: No, the categorical imperative is not related to virtue ethics."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (A) Yes."
+        },
+        {
+            "role": "user",
+            "content": "Question: Was the band The Beatles formed after John F. Kennedy was assassinated?\n\nChoices:\n (A) Yes\n (B) No\n\nSubquestions and answers:\nSubquestion: When was the band The Beatles formed? Answer: The Beatles were formed in 1960.\nSubquestion: When was John F. Kennedy assassinated? Answer: November 22, 1963."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (B) No."
+        },
+        {
+            "role": "user",
+            "content": "Question: Are both lizards and cats mammals?\n\nChoices:\n (A) Yes\n (B) No\n\nSubquestions and answers:\nSubquestion: Are lizards mammals? Answer: No, lizards are not mammals.\nSubquestion: Are cats mammals? Answer: Yes, cats are mammals."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (B) No."
         }
     ]
 }

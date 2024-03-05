@@ -6,6 +6,12 @@ conda activate abs_cot
 pip install -r requirements.txt
 ```
 
+## Datasets
+- HotpotQA
+- StrategyQA
+- OpenBookQA
+- TruthfulQA
+
 ## Reproducing the results
 
 ### Prompt generation:

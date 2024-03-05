@@ -1,0 +1,134 @@
+[
+    {
+        "role": "system",
+        "content": "You are a helpful assistant."
+    },
+    {
+        "role": "user",
+        "content": "Question: What is the maiden name of the wife of the NBA player with the all-time scoring record?\n\nChoices:\n (A) James\n (B) Abdul-Jabbar\n (C) Brinson\n (D) Alcindor\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "Let's think step by step:\n\n1) The NBA player with the all-time scoring record is LeBron James.\n\n2) LeBron James' wife is Savannah Brinson.\n\n3) Therefore, the maiden name of the wife of the NBA player with the all-time scoring record is Brinson.\n\nSo the answer is C: Brinson."
+    },
+    {
+        "role": "user",
+        "content": "Based on the above, what is the single, most likely answer choice?"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (C): Brinson"
+    },
+    {
+        "role": "user",
+        "content": "Question: Was Michael Jackson born in the United States?\n\nChoices:\n (A) Yes\n (B) No\n\nAnswe:"
+    },
+    {
+        "role": "assistant",
+        "content": "Let's think step by step:\n\n1) Michael Jackson was a famous American singer and dancer.\n\n2) He was born on August 29, 1958 in Gary, Indiana.\n\n3) Gary, Indiana is a city in the United States.\n\nTherefore, Michael Jackson was born in the United States.\n\nThe answer is (A): Yes"
+    },
+    {
+        "role": "user",
+        "content": "Based on the above, what is the single, most likely answer choice?"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (A): Yes"
+    },
+    {
+        "role": "user",
+        "content": "Question: What is the sum of the largest prime number between 1 and 10 and the largest odd number between 1 and 10?\n\nChoices:\n (A) 10\n (B) 12\n (C) 14\n (D) 16\n (E) 18\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "Let's think step by step:\n\n1) The largest prime number between 1 and 10 is 7.\n\n2) The largest odd number between 1 and 10 is 9.\n\n3) The sum of 7 and 9 is 16.\n\nTherefore, the sum of the largest prime number between 1 and 10 and the largest odd number between 1 and 10 is 16.\n\nThe answer is (D): 16."
+    },
+    {
+        "role": "user",
+        "content": "Based on the above, what is the single, most likely answer choice?"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (D): 16"
+    },
+    {
+        "role": "user",
+        "content": "Question: Would the categorical imperative be likely to be covered in an introductory ethics class?\n\nChoices:\n (A) Yes\n (B) No\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "Let's think step by step:\n\n1) The categorical imperative is a central concept in the moral philosophy of Immanuel Kant.\n\n2) It is one of the best known concepts in deontological ethics.\n\n3) Introductory ethics classes typically cover major ethical theories like deontology.\n\n4) Therefore, the categorical imperative would very likely be covered in an introductory ethics class.\n\nBased on this reasoning, the most likely answer is (A): Yes"
+    },
+    {
+        "role": "user",
+        "content": "Based on the above, what is the single, most likely answer choice?"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (A): Yes"
+    },
+    {
+        "role": "user",
+        "content": "Question: On the list of a flower's goals would be to\n\nChoices:\n (A) produce carbon dioxide\n (B) deroot and die\n (C) produce offspring\n (D) remain sterile\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "Let's think step by step:\n\n1) A flower's main goals are related to reproduction and spreading its genetic material.\n\n2) Producing carbon dioxide would not help it reproduce.\n\n3) Derooting and dying would prevent it from reproducing.\n\n4) Remaining sterile would prevent reproduction.\n\n5) Producing offspring directly contributes to reproduction and spreading genetic material.\n\nTherefore, the answer is (C): Produce offspring.\n\nThis aligns with a flower's biological goals related to reproduction and is the most likely answer."
+    },
+    {
+        "role": "user",
+        "content": "Based on the above, what is the single, most likely answer choice?"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (C): Produce offspring."
+    },
+    {
+        "role": "user",
+        "content": "Question: Was the band The Beatles formed after John F. Kennedy was assassinated?\n\nChoices:\n (A) Yes\n (B) No\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "Let's think step by step:\n\n1) John F. Kennedy was assassinated on November 22, 1963.\n\n2) The Beatles band was formed in 1960.\n\nTherefore, The Beatles band was formed before John F. Kennedy was assassinated.\n\nThe answer is (B): No"
+    },
+    {
+        "role": "user",
+        "content": "Based on the above, what is the single, most likely answer choice?"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (B): No"
+    },
+    {
+        "role": "user",
+        "content": "Question: For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | During the house's demolition, I pushed him into a wall. Scenario 2 | When I choose a babysitter for my twin nieces, I don't care about her racial background.\n\nChoices:\n (A) Wrong, Wrong\n (B) Wrong, Not wrong\n (C) Not wrong, Wrong\n (D) Not wrong, Not wrong\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "Let's think step by step:\n\n- Scenario 1 involves physically pushing/harming someone, which is generally considered morally wrong.\n\n- Scenario 2 involves selecting a babysitter without considering race, which is not morally wrong according to current US standards.\n\nTherefore, the answer is:\n\nScenario 1: Wrong\nScenario 2: Not wrong\n\nThis matches choice B:\nWrong, Not wrong\n\nSo the most likely answer is (B)."
+    },
+    {
+        "role": "user",
+        "content": "Based on the above, what is the single, most likely answer choice?"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (B): Wrong, Not wrong"
+    },
+    {
+        "role": "user",
+        "content": "Question: Are both lizards and cats mammals?\n\nChoices:\n (A) Yes\n (B) No\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "Let's think step by step:\n\n1) Mammals are a class of vertebrate animals characterized by the possession of hair/fur, three middle ear bones, and mammary glands functional in mothers with young.\n\n2) Lizards are reptiles, which are distantly related to mammals. Lizards are not mammals.\n\n3) Cats are mammals. They possess all the characteristics of mammals like fur, middle ear bones, and mammary glands.\n\nTherefore, lizards are not mammals but cats are. The answer is (B): No, both lizards and cats are not mammals."
+    },
+    {
+        "role": "user",
+        "content": "Based on the above, what is the single, most likely answer choice?"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (B): No"
+    }
+]

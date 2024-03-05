@@ -1,2 +1,4 @@
-openai
 datasets
+transformers
+jinja2
+together

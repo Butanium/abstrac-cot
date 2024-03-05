@@ -4,6 +4,8 @@ hf_models
 experiments
 videos
 runs
+logs
+junk
 
 # Byte-compiled / optimized / DLL files
 **/__pycache__/

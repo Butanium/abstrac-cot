@@ -1,0 +1,62 @@
+[
+    {
+        "role": "system",
+        "content": "You are a helpful assistant."
+    },
+    {
+        "role": "user",
+        "content": "Question: What is the maiden name of the wife of the NBA player with the all-time scoring record?\n\nChoices:\n (A) James\n (B) Abdul-Jabbar\n (C) Brinson\n (D) Alcindor\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (C) Brinson."
+    },
+    {
+        "role": "user",
+        "content": "Question: Was Michael Jackson born in the United States?\n\nChoices:\n (A) Yes\n (B) No\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (A) Yes."
+    },
+    {
+        "role": "user",
+        "content": "Question: What is the sum of the largest prime number between 1 and 10 and the largest odd number between 1 and 10?\n\nChoices:\n (A) 10\n (B) 12\n (C) 14\n (D) 16\n (E) 18\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (D) 16."
+    },
+    {
+        "role": "user",
+        "content": "Question: Would the categorical imperative be likely to be covered in an introductory ethics class?\n\nChoices:\n (A) Yes\n (B) No\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is (A) Yes."
+    },
+    {
+        "role": "user",
+        "content": "Question: On the list of a flower's goals would be to\n\nChoices:\n (A) produce carbon dioxide\n (B) deroot and die\n (C) produce offspring\n (D) remain sterile\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (C) produce offspring."
+    },
+    {
+        "role": "user",
+        "content": "Question: Was the band The Beatles formed after John F. Kennedy was assassinated?\n\nChoices:\n (A) Yes\n (B) No\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (B) No."
+    },
+    {
+        "role": "user",
+        "content": "Question: Are both lizards and cats mammals?\n\nChoices:\n (A) Yes\n (B) No\n\nAnswer:"
+    },
+    {
+        "role": "assistant",
+        "content": "The correct answer is choice (B) No."
+    }
+]

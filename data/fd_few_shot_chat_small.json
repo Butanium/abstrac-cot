@@ -1,0 +1,158 @@
+{
+    "decomp_prompt": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant."
+        },
+        {
+            "role": "user",
+            "content": "I'm going to ask you a question. I want you to decompose it into a series of subquestions. Each subquestion should be self-contained with all the information necessary to solve it. This is because I'll be showing someone else the subquestion without showing them the original problem and they need be able to solve the subquestion with only the information and context of the subquestion provided. This is really important - for example, you should never say things like \"the teacher\" or \"the father\" without giving more context as to who the teacher is and possibly the entire passage or situation that is being referenced. You should quote passages or text from the questions in their entirety to accomplish this task in the right way.\n\nMake sure not to decompose more than necessary or have any trivial subquestions - you'll be evaluated on the simplicity, conciseness, and correctness of your decompositions as well as your final answer. Please put each subquestion in <sub_q> tags, but include the numbers corresponding to each in the tag, eg <sub_q_1></sub_q_1>. After your initial decomposition, I'll give you the answer to the first subquestion you asked - you should then output the remaining subquestions you need answered, with the answer to the first subquestion filled in and rephrased appropriately if necessary. Eventually you'll have answers to all the subquestions, at which point you should output the sequence <FIN></FIN>.\n\nLet's go through some examples together. Do you understand the instructions?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, I understand that I'm meant to decompose questions into subquestions and wrap each component in the appropriate tags. I should ensure that the subquestions can be answered and make sense without any reference to any other questions or subquestions and can stand entirely on their own, so that someone can answer them without reference to anything else. I should also fill in the answers to previous subquestions so I can answer the later ones, but make sure to rephrase the subanswers given by you as needed to make the resulting subquestions make sense. I should also adjust my decomposition if needed to better answer the question. Once I'm finished, I'll output the sequence <FIN></FIN>."
+        },
+        {
+            "role": "user",
+            "content": "Question: What is the sum of the largest prime number between 1 and 10 and the largest odd number between 1 and 10?\n\nChoices:\n (A) 10\n (B) 12\n (C) 14\n (D) 16\n (E) 18"
+        },
+        {
+            "role": "assistant",
+            "content": "<sub_q_1>What are the prime numbers between 1 and 10?</sub_q_1>\n<sub_q_2>What is the largest number in <sub_a_2></sub_a_2>?</sub_q_2>\n<sub_q_3>What are the odd numbers between 1 and 10?</sub_q_3>\n<sub_q_4>What is the largest number in <sub_a_3></sub_a_3>?</sub_q_4>\n<sub_q_5>What is the sum of <sub_a_2></sub_a_2> and <sub_a_4></sub_a_4>?</sub_q_5>"
+        },
+        {
+            "role": "user",
+            "content": "<sub_a_1>The prime numbers between 1 and 10 are:\n - 2\n - 3\n - 5\n - 7\n</sub_a_1>\n<sub_a_3>The odd numbers between 1 and 10 are:\n - 1\n - 3\n - 5\n - 7\n - 9\n</sub_a_3>"
+        },
+        {
+            "role": "assistant",
+            "content": "<sub_q_2>What is the largest number in the list 2, 3, 5, 7?</sub_q_2>\n<sub_q_4>What is the largest number in 1, 3, 5, 7, 9?</sub_q_4>\n<sub_q_5>What is the sum of <sub_a_2></sub_a_2> and <sub_a_4></sub_a_4>?</sub_q_5>"
+        },
+        {
+            "role": "user",
+            "content": "<sub_a_2>The largest number in the list 2, 3, 5, 7 is 7.</sub_a_2>\n<sub_a_4>The largest number in the list 1, 3, 5, 7, 9 is 9.</sub_a_4>"
+        },
+        {
+            "role": "assistant",
+            "content": "<sub_q_5>What is the sum of 7 and 9?</sub_q_5>"
+        },
+        {
+            "role": "user",
+            "content": "<sub_a_5>The sum of 7 and 9 is 16.</sub_a_5>"
+        },
+        {
+            "role": "assistant",
+            "content": "<FIN></FIN>"
+        },
+        {
+            "role": "user",
+            "content": "Question: Would the categorical imperative be likely to be covered in an introductory ethics class?\n\nChoices:\n (A) Yes\n (B) No"
+        },
+        {
+            "role": "assistant",
+            "content": "<sub_q_1>What topics are likely to be covered in an introductory ethics class?</sub_q_1>\n<sub_q_2>Is the categorical imperative related to utilitarianism?</sub_q_2>\n<sub_q_3>Is the categorical imperative related to deontology?</sub_q_3>\n<sub_q_4>Is the categorical imperative related to virtue ethics?</sub_q_4>"
+        },
+        {
+            "role": "user",
+            "content": "<sub_a_1>Topics like utilitarianism, deontology, and virtue ethics are likely to be covered in an introductory ethics class.</sub_a_1>\n<sub_a_2>No, the categorical imperative is not related to utilitarianism.</sub_a_2>\n<sub_a_3>Yes, the categorical imperative is an element of Kant's deontological ethical theory.</sub_a_3>\n<sub_a_4>No, the categorical imperative is not related to virtue ethics.</sub_a_4>"
+        },
+        {
+            "role": "assistant",
+            "content": "<FIN></FIN>"
+        },
+        {
+            "role": "user",
+            "content": "Question: A board 7ft. 9 inches long is divided into 3 equal parts. What is the length of each part?\n\nChoices:\n (A) 31 inches\n (B) 32 inches\n (C) 33 inches\n (D) 34 inches\n (E) 35 inches"
+        },
+        {
+            "role": "assistant",
+            "content": "<sub_q_1>How long is the board that is 7ft. 9 inches long in inches, assuming 1 foot=12 inches?</sub_q_1>\n<sub_q_2>What is <sub_a_1>/3 ?</sub_q_2>"
+        },
+        {
+            "role": "user",
+            "content": "<sub_a_1>7ft. 9 inches long in inches is 7*12 + 9 = 84 + 9 = 93 inches long, assuming 1 foot = 12 inches.</sub_a_1>"
+        },
+        {
+            "role": "assistant",
+            "content": "<sub_q_2>What is 93/3?</sub_q_2>"
+        },
+        {
+            "role": "user",
+            "content": "<sub_a_2>93 / 3 is 31.</sub_a_2>"
+        },
+        {
+            "role": "assistant",
+            "content": "<FIN></FIN>"
+        },
+        {
+            "role": "user",
+            "content": "Question: A state has recently enacted a statute prohibiting the disposal of any nuclear wastes within the state. This law does not contravene or conflict with any federal statutes. A man operates a company in the state that is engaged in the disposal of nuclear wastes. Subsequent to the passage of the state statute, the man, not yet aware of the new law, entered into contracts with many out-of-state firms to dispose of their nuclear wastes in the state. On account of this new law, however, the man will be unable to perform these contracts. Assume that the man has standing to challenge this state law. Which of the following presents his strongest constitutional grounds to challenge the state law prohibiting the disposal of nuclear wastes within the state?\n\nChoices:\n (A) The equal protection clause of the Fourteenth Amendment.\n (B) The commerce clause.\n (C) The privileges and immunities clause of Article IV, Section 2.\n (D) The contract clause."
+        },
+        {
+            "role": "assistant",
+            "content": "<sub_q_1>What is the equal protection clause of the Fourteenth Amendment?</sub_q_1>\n<sub_q_2>What is the commerce clause?</sub_q_2>\n<sub_q_3>What is the privileges and immunities clause of Article IV, Section 2?</sub_q_3>\n<sub_q_4>What is the contract clause?<sub_q_4>"
+        },
+        {
+            "role": "user",
+            "content": "<sub_a_1>The Equal Protection Clause mandates that individuals in similar situations be treated equally by the law.</sub_a_1>\n<sub_a_2>The Commerce Clause gives Congress broad power to regulate interstate commerce and restricts states from impairing interstate commerce.</sub_a_2>\n<sub_a_3>The Privileges and Immunities Clause of Article IV, Section 2 of the Constitution states that \"the citizens of each state shall be entitled to all privileges and immunities of citizens in the several states.\"</sub_a_3>\n<sub_a_4>The Contract Clause prohibits state governments from specifically legislating to interfere with (or usurp) private contract rights.</sub_a_4>"
+        },
+        {
+            "role": "assistant",
+            "content": "<FIN></FIN>"
+        }
+    ],
+    "recomp_prompt": [
+        {
+            "role": "system",
+            "content": "You are a helpful assistant."
+        },
+        {
+            "role": "user",
+            "content": "I'm going to give you a question, answer choices for that question, and a series of subquestions and answers to those subquestions that should help you pick the correct answer choice. You should make sure to make your final answer based on the subquestions and their answer - these have been carefully selected for their correctness and accuracy, so you should defer to them on all matters.\n\nWe'll go through some examples first. Do you understand the instructions?"
+        },
+        {
+            "role": "assistant",
+            "content": "Yes, I understand that I'm supposed to pick the best answer choice for a question given answers to subquestions that you'll provide. I should pick the answer that is most consistent with the subquestions and their answers, since the subquestions and answers are definitely correct and I should defer to them entirely."
+        },
+        {
+            "role": "user",
+            "content": "Question: Was Michael Jackson born in the United States?\n\nChoices:\n (A) Yes\n (B) No\n\nSubquestions and answers:\nQuestion Was Michael Jackson bron in the United States? Answer: Yes, Michael Jackson was born in the United States of America."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (A) Yes."
+        },
+        {
+            "role": "user",
+            "content": "Question: What is the sum of the largest prime number between 1 and 10 and the largest odd number between 1 and 10?\n\nChoices:\n (A) 10\n (B) 12\n (C) 14\n (D) 16\n (E) 18\n\nSubquestions and answers:\nQuestion: What are the prime numbers between 1 and 10? Answer: The prime numbers between 1 and 10 are 2, 3, 5, 7.\nQuestion: What are the odd numbers between 1 and 10: Answer: The odd numbers between 1 and 10 are 1, 3, 5, 7, 9.\nQuestion: What is the largest number in the list 2, 3, 5, 7? Answer: The largest number in the list 2, 3, 5, 7 is 7.\nQuestion: What is the largest number in the list 1, 3, 5, 7, 9? Answer: The largest number in the list 1, 3, 5, 7, 9 is 9.\nQuestion: What is the sum of 7 and 9? Answer: The sum of 7 and 9 is 16."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (D) 16."
+        },
+        {
+            "role": "user",
+            "content": "Question: Would the categorical imperative be likely to be covered in an introductory ethics class?\n\nChoices:\n (A) Yes\n (B) No\n\nSubquestions and answers:\nQuestion: What topics are likely to be covered in an introductory ethics class? Answer: Topics like utilitarianism, deontology, and virtue ethics are likely to be covered in an introductory ethics class.\nQuestion: Is the categorical imperative related to utilitarianism? Answer: No, the categorical imperative is not related to utilitarianism.\nQuestion: Is the categorical imperative related to deontology? Answer: Yes, the categorical imperative is an element of Kant's deontological ethical theory.\nQuestion: Is the categorical imperative related to virtue ethics? Answer: No, the categorical imperative is not related to virtue ethics."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (A) Yes."
+        },
+        {
+            "role": "user",
+            "content": "Question: A board 7ft. 9 inches long is divided into 3 equal parts. What is the length of each part?\n\nChoices:\n (A) 31 inches\n (B) 32 inches\n (C) 33 inches\n (D) 34 inches\n (E) 35 inches\n\nSubquestions and answers:\nQuestion: How long is the board that is 7ft. 9 inches long in inches, assuming 1 foot=12 inches? Answer: 7ft. 9 inches long in inches is 7*12 + 9 = 84 + 9 = 93 inches long, assuming 1 foot = 12 inches.\nQuestion: What is 93/3? Answer: 93 / 3 is 31."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (A) 31 inches."
+        },
+        {
+            "role": "user",
+            "content": "Question: A state has recently enacted a statute prohibiting the disposal of any nuclear wastes within the state. This law does not contravene or conflict with any federal statutes. A man operates a company in the state that is engaged in the disposal of nuclear wastes. Subsequent to the passage of the state statute, the man, not yet aware of the new law, entered into contracts with many out-of-state firms to dispose of their nuclear wastes in the state. On account of this new law, however, the man will be unable to perform these contracts. Assume that the man has standing to challenge this state law. Which of the following presents his strongest constitutional grounds to challenge the state law prohibiting the disposal of nuclear wastes within the state?\n\nChoices:\n (A) The equal protection clause of the Fourteenth Amendment.\n (B) The commerce clause.\n (C) The privileges and immunities clause of Article IV, Section 2.\n (D) The contract clause.\n\nSubquestions and answers:\nQuestion: What is the equal protection clause of the Fourteenth Amendment? Answer: The Equal Protection Clause mandates that individuals in similar situations be treated equally by the law.\nQuestion: What is the commerce clause? Answer: The Commerce Clause gives Congress broad power to regulate interstate commerce and restricts states from impairing interstate commerce.\nQuestion: What is the privileges and immunities clause of Article IV, Section 2? Answer: The Privileges and Immunities Clause of Article IV, Section 2 of the Constitution states that \"the citizens of each state shall be entitled to all privileges and immunities of citizens in the several states.\"\nQuestion: What is the contract clause? Answer: The Contract Clause prohibits state governments from specifically legislating to interfere with (or usurp) private contract rights."
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the above, the correct answer is choice (B) The commerce clause."
+        }
+    ]
+}
